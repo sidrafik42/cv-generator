@@ -66,8 +66,8 @@ This guide will help you deploy the CV Generator application to GitHub and Rende
    - **Branch**: main
    - **Root Directory**: Leave empty (default)
    - **Environment**: Python 3
-   - **Build Command**: `pip install -r requirements.txt`
-   - **Start Command**: `gunicorn app:app`
+   - **Build Command**: `poetry install`
+   - **Start Command**: `poetry run gunicorn app:app`
    - **Instance Type**: Free (or choose as needed)
 
 6. Click "Create Web Service"
@@ -113,10 +113,10 @@ To update your deployed application:
 
 1. **Build Failures**: Check the build logs in Render dashboard for specific error messages
 2. **Application Not Starting**: Verify the Procfile and start command are correct
-3. **Missing Dependencies**: Ensure all required packages are in requirements.txt
+3. **Missing Dependencies**: Ensure all required packages are in pyproject.toml
 4. **File Permissions**: Make sure your uploaded files have correct permissions
 5. **Python Version Compatibility**: Some packages may not be compatible with the latest Python version. 
-   - Solution: Specify a compatible Python version in runtime.txt (currently set to python-3.12)
+   - Solution: Specify a compatible Python version in runtime.txt and pyproject.toml (currently set to python-3.12.4)
    - Example error: Pillow installation issues with newer Python versions
    - Solution: Use a compatible Pillow version (currently set to 10.3.0)
 6. **Directory Creation Issues**: The application now automatically creates necessary directories on startup
@@ -140,3 +140,4 @@ To update your deployed application:
 - First request after spin down may take a few seconds to respond
 - For production use, consider upgrading to a paid plan for better performance
 - The application automatically creates necessary directories (generated, static/uploads) on startup
+- This application now uses Poetry for dependency management instead of pip

@@ -28,6 +28,7 @@ A web application that allows users to create professional CVs in both PDF and W
   - python-docx for Word documents
   - ReportLab for PDF documents
 - **Image Processing**: Pillow
+- **Dependency Management**: Poetry
 
 ## Setup Instructions
 
@@ -39,23 +40,19 @@ A web application that allows users to create professional CVs in both PDF and W
    cd cv-generator
    ```
 
-2. **Create a virtual environment** (recommended)
+2. **Install Poetry** (if not already installed)
    ```bash
-   python -m venv venv
-   # On Windows
-   venv\Scripts\activate
-   # On macOS/Linux
-   source venv/bin/activate
+   pip install poetry
    ```
 
 3. **Install dependencies**
    ```bash
-   pip install -r requirements.txt
+   poetry install
    ```
 
 4. **Run the application**
    ```bash
-   python app.py
+   poetry run python app.py
    ```
 
 5. **Access the application**
@@ -84,8 +81,8 @@ A web application that allows users to create professional CVs in both PDF and W
 4. Configure the service:
    - **Name**: Choose a name for your service
    - **Runtime**: Python 3
-   - **Build Command**: `pip install -r requirements.txt`
-   - **Start Command**: `gunicorn app:app`
+   - **Build Command**: `poetry install`
+   - **Start Command**: `poetry run gunicorn app:app`
    - **Instance Type**: Free (or choose as needed)
 
 5. Add environment variables (if needed):
@@ -97,7 +94,7 @@ A web application that allows users to create professional CVs in both PDF and W
 
 ### Python Version
 
-This application is configured to use Python 3.12, which is specified in the `runtime.txt` file. This version is compatible with all the dependencies in `requirements.txt`. If you encounter compatibility issues, you may need to adjust this version.
+This application is configured to use Python 3.12.4, which is specified in the `runtime.txt` file and `pyproject.toml`. This version is compatible with all the dependencies. If you encounter compatibility issues, you may need to adjust this version.
 
 ## Project Structure
 
@@ -105,7 +102,7 @@ This application is configured to use Python 3.12, which is specified in the `ru
 cv-generator/
 │
 ├── app.py                 # Main Flask application
-├── requirements.txt       # Python dependencies
+├── pyproject.toml         # Poetry dependencies
 ├── runtime.txt            # Python runtime version
 ├── Procfile               # Render deployment configuration
 ├── README.md              # This file
