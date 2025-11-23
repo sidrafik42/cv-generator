@@ -24,7 +24,7 @@ A web application that allows users to create professional CVs in both PDF and W
 
 - **Backend**: Flask (Python)
 - **Frontend**: HTML, CSS, JavaScript
-- **Document Generation**: 
+- **Document Generation**:
   - python-docx for Word documents
   - ReportLab for PDF documents
 - **Image Processing**: Pillow
@@ -35,22 +35,26 @@ A web application that allows users to create professional CVs in both PDF and W
 ### Local Development
 
 1. **Clone the repository**
+
    ```bash
    git clone <repository-url>
    cd cv-generator
    ```
 
 2. **Install Poetry** (if not already installed)
+
    ```bash
    pip install poetry
    ```
 
 3. **Install dependencies**
+
    ```bash
    poetry install
    ```
 
 4. **Run the application**
+
    ```bash
    poetry run python app.py
    ```
@@ -79,6 +83,7 @@ A web application that allows users to create professional CVs in both PDF and W
 2. Click "New" and select "Web Service"
 3. Connect your GitHub repository
 4. Configure the service:
+
    - **Name**: Choose a name for your service
    - **Runtime**: Python 3
    - **Build Command**: `poetry install`
@@ -86,6 +91,7 @@ A web application that allows users to create professional CVs in both PDF and W
    - **Instance Type**: Free (or choose as needed)
 
 5. Add environment variables (if needed):
+
    - No specific environment variables are required for this application
 
 6. Click "Create Web Service"
@@ -94,7 +100,11 @@ A web application that allows users to create professional CVs in both PDF and W
 
 ### Python Version
 
-This application is configured to use Python 3.12.4, which is specified in the `runtime.txt` file and `pyproject.toml`. This version is compatible with all the dependencies. If you encounter compatibility issues, you may need to adjust this version.
+**IMPORTANT**: This application requires Python 3.12 because Pillow (image processing library) does not support Python 3.13 yet.
+
+- The [runtime.txt](file://c:\Users\lenovo\Desktop\cv%20generator\runtime.txt) file specifies `python-3.12` to ensure Render uses the correct version
+- If Render defaults to Python 3.13, the deployment will fail with "Pillow does NOT support Python 3.13 yet"
+- Make sure Render uses Python 3.12 during deployment
 
 ## Project Structure
 

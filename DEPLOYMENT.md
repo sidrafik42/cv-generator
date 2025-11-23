@@ -12,11 +12,13 @@ This guide will help you deploy the CV Generator application to GitHub and Rende
 
 1. Open a terminal in your project directory
 2. Initialize the git repository:
+
    ```bash
    git init
    ```
 
 3. Add all files to git:
+
    ```bash
    git add .
    ```
@@ -40,11 +42,13 @@ This guide will help you deploy the CV Generator application to GitHub and Rende
 
 1. Copy the repository URL from GitHub
 2. Add the remote origin (replace with your actual URL):
+
    ```bash
    git remote add origin https://github.com/yourusername/cv-generator.git
    ```
 
 3. Set the main branch:
+
    ```bash
    git branch -M main
    ```
@@ -61,6 +65,7 @@ This guide will help you deploy the CV Generator application to GitHub and Rende
 3. Connect your GitHub account when prompted
 4. Select the repository you just created
 5. Configure the service with these settings:
+
    - **Name**: cv-generator (or any name you prefer)
    - **Region**: Choose the region closest to you
    - **Branch**: main
@@ -70,9 +75,15 @@ This guide will help you deploy the CV Generator application to GitHub and Rende
    - **Start Command**: `poetry run gunicorn app:app`
    - **Instance Type**: Free (or choose as needed)
 
-6. Click "Create Web Service"
+6. **IMPORTANT**: Make sure Render uses Python 3.12, not 3.13:
 
-7. Render will automatically start building and deploying your application. This process may take a few minutes.
+   - The application is configured to use Python 3.12 because Pillow (image processing library) does not support Python 3.13 yet
+   - Render may default to Python 3.13, which will cause deployment failures
+   - The [runtime.txt](file://c:\Users\lenovo\Desktop\cv%20generator\runtime.txt) and [pyproject.toml](file://c:\Users\lenovo\Desktop\cv%20generator\pyproject.toml) files specify Python 3.12 to ensure compatibility
+
+7. Click "Create Web Service"
+
+8. Render will automatically start building and deploying your application. This process may take a few minutes.
 
 ## Step 5: Configure Environment Variables (if needed)
 
@@ -95,12 +106,14 @@ To update your deployed application:
 
 1. Make changes to your local code
 2. Commit your changes:
+
    ```bash
    git add .
    git commit -m "Description of changes"
    ```
 
 3. Push to GitHub:
+
    ```bash
    git push origin main
    ```
@@ -115,10 +128,10 @@ To update your deployed application:
 2. **Application Not Starting**: Verify the Procfile and start command are correct
 3. **Missing Dependencies**: Ensure all required packages are in pyproject.toml
 4. **File Permissions**: Make sure your uploaded files have correct permissions
-5. **Python Version Compatibility**: Some packages may not be compatible with the latest Python version. 
-   - Solution: Specify a compatible Python version in runtime.txt and pyproject.toml (currently set to python-3.12.4)
-   - Example error: Pillow installation issues with newer Python versions
-   - Solution: Use a compatible Pillow version (currently set to 10.3.0)
+5. **Python Version Compatibility**: Pillow does NOT support Python 3.13 yet
+   - Solution: Use Python 3.12 (specified in runtime.txt and pyproject.toml)
+   - Error message: "Pillow does NOT support Python 3.13 yet, so Render cannot install it"
+   - Solution: Make sure Render uses Python 3.12, not 3.13
 6. **Directory Creation Issues**: The application now automatically creates necessary directories on startup
 
 ### Checking Logs
@@ -140,4 +153,5 @@ To update your deployed application:
 - First request after spin down may take a few seconds to respond
 - For production use, consider upgrading to a paid plan for better performance
 - The application automatically creates necessary directories (generated, static/uploads) on startup
-- This application now uses Poetry for dependency management instead of pip
+- This application uses Poetry for dependency management instead of pip
+- **IMPORTANT**: Python 3.12 is required because Pillow does not support Python 3.13 yet
