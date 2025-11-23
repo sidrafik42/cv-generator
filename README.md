@@ -24,7 +24,7 @@ A web application that allows users to create professional CVs in both PDF and W
 
 - **Backend**: Flask (Python)
 - **Frontend**: HTML, CSS, JavaScript
-- **Document Generation**:
+- **Document Generation**: 
   - python-docx for Word documents
   - ReportLab for PDF documents
 - **Image Processing**: Pillow
@@ -34,14 +34,12 @@ A web application that allows users to create professional CVs in both PDF and W
 ### Local Development
 
 1. **Clone the repository**
-
    ```bash
    git clone <repository-url>
    cd cv-generator
    ```
 
 2. **Create a virtual environment** (recommended)
-
    ```bash
    python -m venv venv
    # On Windows
@@ -51,13 +49,11 @@ A web application that allows users to create professional CVs in both PDF and W
    ```
 
 3. **Install dependencies**
-
    ```bash
    pip install -r requirements.txt
    ```
 
 4. **Run the application**
-
    ```bash
    python app.py
    ```
@@ -86,7 +82,6 @@ A web application that allows users to create professional CVs in both PDF and W
 2. Click "New" and select "Web Service"
 3. Connect your GitHub repository
 4. Configure the service:
-
    - **Name**: Choose a name for your service
    - **Runtime**: Python 3
    - **Build Command**: `pip install -r requirements.txt`
@@ -94,34 +89,15 @@ A web application that allows users to create professional CVs in both PDF and W
    - **Instance Type**: Free (or choose as needed)
 
 5. Add environment variables (if needed):
-
    - No specific environment variables are required for this application
 
 6. Click "Create Web Service"
 
 7. Render will automatically deploy your application. The deployment URL will be provided in the dashboard.
 
-### Step 3: Configure for Production
+### Python Version
 
-Since Render uses Gunicorn as the production server, we need to add it to our requirements:
-
-1. Update `requirements.txt` to include Gunicorn:
-
-   ```
-   Flask==2.3.3
-   python-docx==0.8.11
-   reportlab==4.0.4
-   Pillow==10.0.1
-   Werkzeug==2.3.7
-   gunicorn==21.2.0
-   ```
-
-2. Commit and push the changes:
-   ```bash
-   git add requirements.txt
-   git commit -m "Add gunicorn for production deployment"
-   git push origin main
-   ```
+This application is configured to use Python 3.12, which is specified in the `runtime.txt` file. This version is compatible with all the dependencies in `requirements.txt`. If you encounter compatibility issues, you may need to adjust this version.
 
 ## Project Structure
 
@@ -130,8 +106,12 @@ cv-generator/
 │
 ├── app.py                 # Main Flask application
 ├── requirements.txt       # Python dependencies
+├── runtime.txt            # Python runtime version
+├── Procfile               # Render deployment configuration
 ├── README.md              # This file
+├── DEPLOYMENT.md          # Deployment guide
 ├── .gitignore             # Git ignore file
+├── LICENSE                # MIT License
 │
 ├── templates/             # HTML templates
 │   ├── index.html         # Main form page

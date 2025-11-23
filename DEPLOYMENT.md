@@ -12,13 +12,11 @@ This guide will help you deploy the CV Generator application to GitHub and Rende
 
 1. Open a terminal in your project directory
 2. Initialize the git repository:
-
    ```bash
    git init
    ```
 
 3. Add all files to git:
-
    ```bash
    git add .
    ```
@@ -42,13 +40,11 @@ This guide will help you deploy the CV Generator application to GitHub and Rende
 
 1. Copy the repository URL from GitHub
 2. Add the remote origin (replace with your actual URL):
-
    ```bash
    git remote add origin https://github.com/yourusername/cv-generator.git
    ```
 
 3. Set the main branch:
-
    ```bash
    git branch -M main
    ```
@@ -65,7 +61,6 @@ This guide will help you deploy the CV Generator application to GitHub and Rende
 3. Connect your GitHub account when prompted
 4. Select the repository you just created
 5. Configure the service with these settings:
-
    - **Name**: cv-generator (or any name you prefer)
    - **Region**: Choose the region closest to you
    - **Branch**: main
@@ -100,14 +95,12 @@ To update your deployed application:
 
 1. Make changes to your local code
 2. Commit your changes:
-
    ```bash
    git add .
    git commit -m "Description of changes"
    ```
 
 3. Push to GitHub:
-
    ```bash
    git push origin main
    ```
@@ -122,6 +115,10 @@ To update your deployed application:
 2. **Application Not Starting**: Verify the Procfile and start command are correct
 3. **Missing Dependencies**: Ensure all required packages are in requirements.txt
 4. **File Permissions**: Make sure your uploaded files have correct permissions
+5. **Python Version Compatibility**: Some packages may not be compatible with the latest Python version. 
+   - Solution: Specify a compatible Python version in runtime.txt (currently set to python-3.12)
+   - Example error: Pillow installation issues with newer Python versions
+   - Solution: Use a compatible Pillow version (currently set to 10.3.0)
 
 ### Checking Logs
 
