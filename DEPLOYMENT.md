@@ -72,7 +72,7 @@ This guide will help you deploy the CV Generator application to GitHub and Rende
    - **Root Directory**: Leave empty (default)
    - **Environment**: Python 3
    - **Build Command**: `poetry install`
-   - **Start Command**: `poetry run gunicorn app:app`
+   - **Start Command**: `poetry run gunicorn main:app`
    - **Instance Type**: Free (or choose as needed)
 
 6. **IMPORTANT**: Make sure Render uses Python 3.12, not 3.13:
@@ -134,7 +134,11 @@ To update your deployed application:
    - Solution: Make sure Render uses Python 3.12 by specifying it in runtime.txt
    - The [runtime.txt](file://c:\Users\lenovo\Desktop\cv%20generator\runtime.txt) file should contain exactly: `python-3.12.4`
    - The [pyproject.toml](file://c:\Users\lenovo\Desktop\cv%20generator\pyproject.toml) should specify: `python = "^3.12"`
-6. **Directory Creation Issues**: The application now automatically creates necessary directories on startup
+6. **Package Installation Issues**:
+   - Error message: "Error: The current project could not be installed: No file/folder found for package cv-generator"
+   - Solution: The project now uses proper Python package structure with `cv_generator` directory and `__init__.py` file
+   - Make sure the [pyproject.toml](file://c:\Users\lenovo\Desktop\cv%20generator\pyproject.toml) includes: `packages = [{include = "cv_generator"}]`
+7. **Directory Creation Issues**: The application now automatically creates necessary directories on startup
 
 ### Checking Logs
 

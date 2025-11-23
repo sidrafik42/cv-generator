@@ -56,7 +56,13 @@ A web application that allows users to create professional CVs in both PDF and W
 4. **Run the application**
 
    ```bash
-   poetry run python app.py
+   poetry run python main.py
+   ```
+
+   or
+
+   ```bash
+   poetry run gunicorn main:app
    ```
 
 5. **Access the application**
@@ -87,7 +93,7 @@ A web application that allows users to create professional CVs in both PDF and W
    - **Name**: Choose a name for your service
    - **Runtime**: Python 3
    - **Build Command**: `poetry install`
-   - **Start Command**: `poetry run gunicorn app:app`
+   - **Start Command**: `poetry run gunicorn main:app`
    - **Instance Type**: Free (or choose as needed)
 
 5. Add environment variables (if needed):
@@ -111,7 +117,7 @@ A web application that allows users to create professional CVs in both PDF and W
 ```
 cv-generator/
 │
-├── app.py                 # Main Flask application
+├── main.py                # Application entry point
 ├── pyproject.toml         # Poetry dependencies
 ├── runtime.txt            # Python runtime version
 ├── Procfile               # Render deployment configuration
@@ -119,6 +125,11 @@ cv-generator/
 ├── DEPLOYMENT.md          # Deployment guide
 ├── .gitignore             # Git ignore file
 ├── LICENSE                # MIT License
+├── run.bat                # Windows run script
+│
+├── cv_generator/          # Main package
+│   ├── __init__.py        # Package initializer
+│   └── app.py             # Flask application
 │
 ├── templates/             # HTML templates
 │   ├── index.html         # Main form page
