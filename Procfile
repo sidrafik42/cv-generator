@@ -1,1 +1,1 @@
-web: PYTHONPATH=/opt/render/project/src poetry run gunicorn cv_generator.main:app
+web: PYTHONPATH=/opt/render/project/src poetry run gunicorn main:app
