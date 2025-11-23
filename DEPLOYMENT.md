@@ -12,13 +12,11 @@ This guide will help you deploy the CV Generator application to GitHub and Rende
 
 1. Open a terminal in your project directory
 2. Initialize the git repository:
-
    ```bash
    git init
    ```
 
 3. Add all files to git:
-
    ```bash
    git add .
    ```
@@ -42,13 +40,11 @@ This guide will help you deploy the CV Generator application to GitHub and Rende
 
 1. Copy the repository URL from GitHub
 2. Add the remote origin (replace with your actual URL):
-
    ```bash
    git remote add origin https://github.com/yourusername/cv-generator.git
    ```
 
 3. Set the main branch:
-
    ```bash
    git branch -M main
    ```
@@ -65,7 +61,6 @@ This guide will help you deploy the CV Generator application to GitHub and Rende
 3. Connect your GitHub account when prompted
 4. Select the repository you just created
 5. Configure the service with these settings:
-
    - **Name**: cv-generator (or any name you prefer)
    - **Region**: Choose the region closest to you
    - **Branch**: main
@@ -76,14 +71,10 @@ This guide will help you deploy the CV Generator application to GitHub and Rende
    - **Instance Type**: Free (or choose as needed)
 
 6. **IMPORTANT**: Make sure Render uses Python 3.12, not 3.13:
-
-   - The application is configured to use Python 3.12 because Pillow (image processing library) does not support Python 3.13 yet
-   - Render may default to Python 3.13, which will cause deployment failures
-   - The [runtime.txt](file://c:\Users\lenovo\Desktop\cv%20generator\runtime.txt) and [pyproject.toml](file://c:\Users\lenovo\Desktop\cv%20generator\pyproject.toml) files specify Python 3.12 to ensure compatibility
-   - If you see an error like "Current Python version (3.13.4) is not allowed by the project (3.12)", it means Render is using Python 3.13 instead of 3.12
-   - **If Render continues to use Python 3.13**, you may need to:
-     - Manually specify the Python version in the Render dashboard
-     - Contact Render support to ensure they're respecting the [runtime.txt](file://c:\Users\lenovo\Desktop\cv%20generator\runtime.txt) file
+   - Render defaults to Python 3.13 unless explicitly told to use a different version
+   - The application is configured to use Python 3.12.15 because Pillow (image processing library) does not support Python 3.13 yet
+   - The [runtime.txt](file://c:\Users\lenovo\Desktop\cv%20generator\runtime.txt) file specifies `python-3.12.15` to ensure Render uses the correct version
+   - You can also use 3.12.2 or 3.12.10 — Render supports all 3.12.x versions
 
 7. Click "Create Web Service"
 
@@ -110,14 +101,12 @@ To update your deployed application:
 
 1. Make changes to your local code
 2. Commit your changes:
-
    ```bash
    git add .
    git commit -m "Description of changes"
    ```
 
 3. Push to GitHub:
-
    ```bash
    git push origin main
    ```
@@ -135,9 +124,9 @@ To update your deployed application:
 5. **Python Version Compatibility**: Pillow does NOT support Python 3.13 yet
    - Error message: "Current Python version (3.13.4) is not allowed by the project (3.12)"
    - Solution: Make sure Render uses Python 3.12 by specifying it in runtime.txt
-   - The [runtime.txt](file://c:\Users\lenovo\Desktop\cv%20generator\runtime.txt) file should contain exactly: `python-3.12.3`
-   - The [pyproject.toml](file://c:\Users\lenovo\Desktop\cv%20generator\pyproject.toml) should specify: `python = "3.12.3"`
-6. **Package Installation Issues**:
+   - The [runtime.txt](file://c:\Users\lenovo\Desktop\cv%20generator\runtime.txt) file should contain exactly: `python-3.12.15`
+   - The [pyproject.toml](file://c:\Users\lenovo\Desktop\cv%20generator\pyproject.toml) should specify: `python = "3.12.15"`
+6. **Package Installation Issues**: 
    - Error message: "Error: The current project could not be installed: No file/folder found for package cv-generator"
    - Solution: The project now uses proper Python package structure with `cv_generator` directory and `__init__.py` file
    - Make sure the [pyproject.toml](file://c:\Users\lenovo\Desktop\cv%20generator\pyproject.toml) includes: `packages = [{include = "cv_generator"}]`
@@ -167,6 +156,5 @@ To update your deployed application:
 - For production use, consider upgrading to a paid plan for better performance
 - The application automatically creates necessary directories (generated, static/uploads) on startup
 - This application uses Poetry for dependency management instead of pip
-- **IMPORTANT**: Python 3.12 is required because Pillow does not support Python 3.13 yet
-- If Render still defaults to Python 3.13, try specifying the exact version `python-3.12.3` in [runtime.txt](file://c:\Users\lenovo\Desktop\cv%20generator\runtime.txt)
-- If problems persist, contact Render support for assistance with Python version selection
+- **IMPORTANT**: Python 3.12.15 is required because Pillow does not support Python 3.13 yet
+- Render defaults to Python 3.13 unless explicitly told to use a different version through [runtime.txt](file://c:\Users\lenovo\Desktop\cv%20generator\runtime.txt)
