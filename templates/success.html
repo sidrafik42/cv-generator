@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CV Generated Successfully</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1><i class="fas fa-check-circle"></i> Success!</h1>
+        <p>Your professional CV has been created</p>
+      </header>
+
+      <div class="success-content">
+        <div class="success-message">
+          <h2>CV Generated Successfully</h2>
+          <p>
+            Thank you for using our CV Generator. Your professional CV has been
+            successfully created in both PDF and Word formats.
+          </p>
+        </div>
+
+        <div class="download-section">
+          <h3><i class="fas fa-download"></i> Download Your CV</h3>
+          <div class="download-buttons">
+            {% if docx_file %}
+            <a href="/download/{{ docx_file }}" class="btn-download">
+              <i class="fas fa-file-word"></i> Download Word Document
+            </a>
+            {% endif %} {% if pdf_file %}
+            <a href="/download/{{ pdf_file }}" class="btn-download">
+              <i class="fas fa-file-pdf"></i> Download PDF Document
+            </a>
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="actions">
+          <a href="/" class="btn-secondary"
+            ><i class="fas fa-plus"></i> Create Another CV</a
+          >
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
