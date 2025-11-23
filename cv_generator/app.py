@@ -41,7 +41,7 @@ app.config['UPLOAD_FOLDER'] = os.path.join(root_dir, 'static', 'uploads')
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max file size
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'your-secret-key-change-this-in-production')
 # CPA Grip Link - Set this via environment variable or update directly
-app.config['CPA_GRIP_LINK'] = os.environ.get('CPA_GRIP_LINK', 'https://your-cpa-grip-link.com/offer')
+app.config['CPA_GRIP_LINK'] = os.environ.get('CPA_GRIP_LINK', 'https://playabledownloads.com/1857355')
 
 @app.route('/')
 def index():
