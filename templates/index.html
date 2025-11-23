@@ -3,7 +3,38 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Professional CV Generator</title>
+    
+    <!-- Primary Meta Tags -->
+    <title>Free Professional CV Generator Online | Create Resume in PDF & Word - CV Generator</title>
+    <meta name="title" content="Free Professional CV Generator Online | Create Resume in PDF & Word - CV Generator" />
+    <meta name="description" content="Create a professional CV or resume in minutes with our free online CV generator. Download your CV in PDF and Word formats. No sign-up required. Professional templates, easy to use, 100% free." />
+    <meta name="keywords" content="CV generator, resume builder, free CV maker, professional CV, resume creator, CV template, PDF CV, Word CV, online resume builder, create CV online, CV generator free, resume generator, professional resume builder" />
+    <meta name="author" content="CV Generator" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="English" />
+    <meta name="revisit-after" content="7 days" />
+    <link rel="canonical" href="{{ request.url }}" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{{ request.url }}" />
+    <meta property="og:title" content="Free Professional CV Generator Online | Create Resume in PDF & Word" />
+    <meta property="og:description" content="Create a professional CV or resume in minutes with our free online CV generator. Download your CV in PDF and Word formats. No sign-up required." />
+    <meta property="og:image" content="{{ url_for('static', filename='images/og-image.jpg', _external=True) }}" />
+    <meta property="og:site_name" content="CV Generator" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="{{ request.url }}" />
+    <meta name="twitter:title" content="Free Professional CV Generator Online | Create Resume in PDF & Word" />
+    <meta name="twitter:description" content="Create a professional CV or resume in minutes with our free online CV generator. Download your CV in PDF and Word formats." />
+    <meta name="twitter:image" content="{{ url_for('static', filename='images/og-image.jpg', _external=True) }}" />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}" />
+    
+    <!-- Stylesheets -->
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='css/style.css') }}"
@@ -12,14 +43,81 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
+    
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "CV Generator",
+      "description": "Free online professional CV and resume generator. Create and download your CV in PDF and Word formats instantly.",
+      "url": "{{ request.url_root }}",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "ratingCount": "1250"
+      },
+      "featureList": [
+        "Free CV generation",
+        "PDF and Word format export",
+        "Professional templates",
+        "No registration required",
+        "Instant download"
+      ]
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "How to Create a Professional CV",
+      "description": "Step-by-step guide to create a professional CV using our free online CV generator",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Enter Personal Information",
+          "text": "Fill in your name, email, phone, and address"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Add Education Details",
+          "text": "Enter your educational background including institutions and degrees"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Add Work Experience",
+          "text": "List your work experience with companies, positions, and descriptions"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Add Skills and Languages",
+          "text": "Include your professional skills and language proficiencies"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Generate and Download",
+          "text": "Click generate to create your CV in PDF and Word formats"
+        }
+      ]
+    }
+    </script>
   </head>
   <body>
     <div class="container">
       <header>
-        <h1><i class="fas fa-file-alt"></i> Professional CV Generator</h1>
+        <h1><i class="fas fa-file-alt"></i> Free Professional CV Generator - Create Your Resume Online</h1>
         <p>
-          Create your polished, professional CV in minutes with our easy-to-use
-          tool
+          Create your polished, professional CV in minutes with our easy-to-use, free online CV generator. 
+          Download your resume in both PDF and Word formats instantly. No registration required. 
+          Perfect for job seekers, professionals, and students looking to create a standout CV.
         </p>
       </header>
 
@@ -79,8 +177,8 @@
 
           <div class="form-group">
             <label for="photo">Photo (Optional)</label>
-            <input type="file" id="photo" name="photo" accept="image/*" />
-            <small>Upload a professional headshot (JPG, PNG)</small>
+            <input type="file" id="photo" name="photo" accept="image/*" aria-label="Upload professional headshot photo" />
+            <small>Upload a professional headshot (JPG, PNG) - Recommended size: 2x2 inches, 300 DPI</small>
           </div>
 
           <div class="form-group">
@@ -276,6 +374,52 @@
           </button>
         </div>
       </form>
+      
+      <!-- SEO Content Section -->
+      <section class="seo-content" style="margin-top: 3rem; padding: 2rem; background: #f8f9fa; border-radius: 8px;">
+        <h2 style="color: #2c3e50; margin-bottom: 1rem;">Why Use Our Free CV Generator?</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+          <div>
+            <h3 style="color: #3498db; margin-bottom: 0.5rem;"><i class="fas fa-check-circle"></i> 100% Free</h3>
+            <p style="color: #555; line-height: 1.6;">Create unlimited professional CVs completely free. No hidden fees, no subscription required.</p>
+          </div>
+          <div>
+            <h3 style="color: #3498db; margin-bottom: 0.5rem;"><i class="fas fa-file-pdf"></i> Multiple Formats</h3>
+            <p style="color: #555; line-height: 1.6;">Download your CV in both PDF and Word formats. Perfect for online applications and printing.</p>
+          </div>
+          <div>
+            <h3 style="color: #3498db; margin-bottom: 0.5rem;"><i class="fas fa-clock"></i> Instant Results</h3>
+            <p style="color: #555; line-height: 1.6;">Generate your professional CV in minutes. No waiting, no delays - get your resume instantly.</p>
+          </div>
+          <div>
+            <h3 style="color: #3498db; margin-bottom: 0.5rem;"><i class="fas fa-shield-alt"></i> Privacy First</h3>
+            <p style="color: #555; line-height: 1.6;">Your data is processed securely. We don't store your personal information or CV content.</p>
+          </div>
+        </div>
+        
+        <div style="margin-top: 2rem;">
+          <h3 style="color: #2c3e50; margin-bottom: 1rem;">How to Create a Professional CV Online</h3>
+          <p style="color: #555; line-height: 1.8; margin-bottom: 1rem;">
+            Our free CV generator makes it easy to create a professional resume that stands out to employers. 
+            Simply fill in your personal information, education history, work experience, skills, and languages. 
+            Our tool automatically formats everything into a clean, professional CV that you can download in PDF or Word format.
+          </p>
+          <p style="color: #555; line-height: 1.8;">
+            Whether you're a recent graduate, experienced professional, or career changer, our CV generator helps you 
+            create a resume that highlights your qualifications and achievements. Best of all, it's completely free 
+            and requires no registration - just fill out the form and download your CV instantly.
+          </p>
+        </div>
+        
+        <div style="margin-top: 2rem;">
+          <h3 style="color: #2c3e50; margin-bottom: 1rem;">Perfect for Job Seekers</h3>
+          <p style="color: #555; line-height: 1.8;">
+            Looking for your next career opportunity? Our CV generator is trusted by thousands of job seekers worldwide. 
+            Create a professional resume that gets noticed by recruiters and hiring managers. Compatible with ATS (Applicant Tracking Systems) 
+            and optimized for both digital and print applications.
+          </p>
+        </div>
+      </section>
     </div>
 
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>

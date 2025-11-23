@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, send_file, redirect, url_for
+from flask import Flask, render_template, request, send_file, redirect, url_for, Response
 import os
 from docx import Document
 from docx.shared import Inches, Pt
@@ -43,6 +43,37 @@ app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max file size
 @app.route('/')
 def index():
     return render_template('index.html')
+
+@app.route('/robots.txt')
+def robots_txt():
+    """Serve robots.txt file for SEO"""
+    robots_content = """User-agent: *
+Allow: /
+Disallow: /generated/
+Disallow: /static/uploads/
+
+Sitemap: {}/sitemap.xml
+""".format(request.url_root.rstrip('/'))
+    return Response(robots_content, mimetype='text/plain')
+
+@app.route('/sitemap.xml')
+def sitemap_xml():
+    """Generate sitemap.xml for SEO"""
+    from datetime import datetime
+    base_url = request.url_root.rstrip('/')
+    lastmod = datetime.now().strftime('%Y-%m-%d')
+    
+    sitemap_content = f"""<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>{base_url}/</loc>
+    <lastmod>{lastmod}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>
+"""
+    return Response(sitemap_content, mimetype='application/xml')
 
 @app.route('/generate_cv', methods=['POST'])
 def generate_cv():
