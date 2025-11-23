@@ -24,13 +24,20 @@ try:
 except ImportError:
     WD_STYLE_TYPE = None
 
+# Get the root directory (parent of cv_generator)
+root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 # Create necessary directories
 directories = ['generated', 'static/uploads']
 for directory in directories:
-    os.makedirs(directory, exist_ok=True)
+    dir_path = os.path.join(root_dir, directory)
+    os.makedirs(dir_path, exist_ok=True)
 
-app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = 'static/uploads'
+# Initialize Flask with correct template and static folders
+app = Flask(__name__, 
+            template_folder=os.path.join(root_dir, 'templates'),
+            static_folder=os.path.join(root_dir, 'static'))
+app.config['UPLOAD_FOLDER'] = os.path.join(root_dir, 'static', 'uploads')
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max file size
 
 @app.route('/')
@@ -107,7 +114,8 @@ def success():
 
 @app.route('/download/<filename>')
 def download_file(filename):
-    return send_file(os.path.join('generated', filename), as_attachment=True)
+    generated_path = os.path.join(root_dir, 'generated', filename)
+    return send_file(generated_path, as_attachment=True)
 
 def create_word_document(name, email, phone, address, profile,
                         education_institutes, education_degrees, education_years,
@@ -311,8 +319,9 @@ def create_word_document(name, email, phone, address, profile,
         doc.add_paragraph(references, style='CVNormal')
     
     # Save document
-    os.makedirs('generated', exist_ok=True)
-    doc.save(os.path.join('generated', filename))
+    generated_dir = os.path.join(root_dir, 'generated')
+    os.makedirs(generated_dir, exist_ok=True)
+    doc.save(os.path.join(generated_dir, filename))
 
 def create_pdf_document(name, email, phone, address, profile,
                        education_institutes, education_degrees, education_years,
@@ -320,8 +329,9 @@ def create_pdf_document(name, email, phone, address, profile,
                        skills, languages, proficiencies, certifications, interests, references,
                        photo_path, filename):
     # Create PDF with modern styling
-    os.makedirs('generated', exist_ok=True)
-    pdf_path = os.path.join('generated', filename)
+    generated_dir = os.path.join(root_dir, 'generated')
+    os.makedirs(generated_dir, exist_ok=True)
+    pdf_path = os.path.join(generated_dir, filename)
     
     # Create document with modern styling
     doc = SimpleDocTemplate(pdf_path, pagesize=letter,
