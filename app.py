@@ -24,12 +24,14 @@ try:
 except ImportError:
     WD_STYLE_TYPE = None
 
+# Create necessary directories
+directories = ['generated', 'static/uploads']
+for directory in directories:
+    os.makedirs(directory, exist_ok=True)
+
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'static/uploads'
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max file size
-
-# Ensure upload folder exists
-os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
 @app.route('/')
 def index():
