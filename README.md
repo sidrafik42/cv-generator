@@ -24,7 +24,7 @@ A web application that allows users to create professional CVs in both PDF and W
 
 - **Backend**: Flask (Python)
 - **Frontend**: HTML, CSS, JavaScript
-- **Document Generation**:
+- **Document Generation**: 
   - python-docx for Word documents
   - ReportLab for PDF documents
 - **Image Processing**: Pillow
@@ -35,32 +35,26 @@ A web application that allows users to create professional CVs in both PDF and W
 ### Local Development
 
 1. **Clone the repository**
-
    ```bash
    git clone <repository-url>
    cd cv-generator
    ```
 
 2. **Install Poetry** (if not already installed)
-
    ```bash
    pip install poetry
    ```
 
 3. **Install dependencies**
-
    ```bash
    poetry install
    ```
 
 4. **Run the application**
-
    ```bash
    poetry run python main.py
    ```
-
    or
-
    ```bash
    poetry run gunicorn main:app
    ```
@@ -89,7 +83,6 @@ A web application that allows users to create professional CVs in both PDF and W
 2. Click "New" and select "Web Service"
 3. Connect your GitHub repository
 4. Configure the service:
-
    - **Name**: Choose a name for your service
    - **Runtime**: Python 3
    - **Build Command**: `poetry install`
@@ -97,7 +90,6 @@ A web application that allows users to create professional CVs in both PDF and W
    - **Instance Type**: Free (or choose as needed)
 
 5. Add environment variables (if needed):
-
    - No specific environment variables are required for this application
 
 6. Click "Create Web Service"
@@ -106,11 +98,11 @@ A web application that allows users to create professional CVs in both PDF and W
 
 ### Python Version
 
-**IMPORTANT**: This application requires Python 3.12 because Pillow (image processing library) does not support Python 3.13 yet.
-
-- The [runtime.txt](file://c:\Users\lenovo\Desktop\cv%20generator\runtime.txt) file specifies `python-3.12.4` to ensure Render uses the correct version
+**IMPORTANT**: This application requires Python 3.12.3 because Pillow (image processing library) does not support Python 3.13 yet. 
+- The [runtime.txt](file://c:\Users\lenovo\Desktop\cv%20generator\runtime.txt) file specifies `python-3.12.3` to ensure Render uses the correct version
 - If Render defaults to Python 3.13, the deployment will fail with "Current Python version (3.13.4) is not allowed by the project (3.12)"
-- If you encounter this error, make sure your [runtime.txt](file://c:\Users\lenovo\Desktop\cv%20generator\runtime.txt) file contains exactly: `python-3.12.4`
+- If you encounter this error, make sure your [runtime.txt](file://c:\Users\lenovo\Desktop\cv%20generator\runtime.txt) file contains exactly: `python-3.12.3`
+- **If problems persist**, contact Render support for assistance with Python version selection
 
 ## Project Structure
 
@@ -126,6 +118,7 @@ cv-generator/
 ├── .gitignore             # Git ignore file
 ├── LICENSE                # MIT License
 ├── run.bat                # Windows run script
+├── test_import.py         # Import test script
 │
 ├── cv_generator/          # Main package
 │   ├── __init__.py        # Package initializer

@@ -1,1 +1,1 @@
-web: poetry run gunicorn main:app
+web: PYTHONPATH=/opt/render/project/src poetry run gunicorn main:app
