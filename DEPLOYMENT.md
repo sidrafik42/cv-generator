@@ -119,6 +119,7 @@ To update your deployed application:
    - Solution: Specify a compatible Python version in runtime.txt (currently set to python-3.12)
    - Example error: Pillow installation issues with newer Python versions
    - Solution: Use a compatible Pillow version (currently set to 10.3.0)
+6. **Directory Creation Issues**: The application now automatically creates necessary directories on startup
 
 ### Checking Logs
 
@@ -138,3 +139,4 @@ To update your deployed application:
 - The free tier of Render will spin down your application after 15 minutes of inactivity
 - First request after spin down may take a few seconds to respond
 - For production use, consider upgrading to a paid plan for better performance
+- The application automatically creates necessary directories (generated, static/uploads) on startup
