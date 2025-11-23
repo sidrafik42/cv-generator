@@ -80,6 +80,7 @@ This guide will help you deploy the CV Generator application to GitHub and Rende
    - The application is configured to use Python 3.12 because Pillow (image processing library) does not support Python 3.13 yet
    - Render may default to Python 3.13, which will cause deployment failures
    - The [runtime.txt](file://c:\Users\lenovo\Desktop\cv%20generator\runtime.txt) and [pyproject.toml](file://c:\Users\lenovo\Desktop\cv%20generator\pyproject.toml) files specify Python 3.12 to ensure compatibility
+   - If you see an error like "Current Python version (3.13.4) is not allowed by the project (3.12)", it means Render is using Python 3.13 instead of 3.12
 
 7. Click "Create Web Service"
 
@@ -129,9 +130,10 @@ To update your deployed application:
 3. **Missing Dependencies**: Ensure all required packages are in pyproject.toml
 4. **File Permissions**: Make sure your uploaded files have correct permissions
 5. **Python Version Compatibility**: Pillow does NOT support Python 3.13 yet
-   - Solution: Use Python 3.12 (specified in runtime.txt and pyproject.toml)
-   - Error message: "Pillow does NOT support Python 3.13 yet, so Render cannot install it"
-   - Solution: Make sure Render uses Python 3.12, not 3.13
+   - Error message: "Current Python version (3.13.4) is not allowed by the project (3.12)"
+   - Solution: Make sure Render uses Python 3.12 by specifying it in runtime.txt
+   - The [runtime.txt](file://c:\Users\lenovo\Desktop\cv%20generator\runtime.txt) file should contain exactly: `python-3.12.4`
+   - The [pyproject.toml](file://c:\Users\lenovo\Desktop\cv%20generator\pyproject.toml) should specify: `python = "^3.12"`
 6. **Directory Creation Issues**: The application now automatically creates necessary directories on startup
 
 ### Checking Logs
@@ -155,3 +157,4 @@ To update your deployed application:
 - The application automatically creates necessary directories (generated, static/uploads) on startup
 - This application uses Poetry for dependency management instead of pip
 - **IMPORTANT**: Python 3.12 is required because Pillow does not support Python 3.13 yet
+- If Render still defaults to Python 3.13, try specifying the exact version `python-3.12.4` in [runtime.txt](file://c:\Users\lenovo\Desktop\cv%20generator\runtime.txt)

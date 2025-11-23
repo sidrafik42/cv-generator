@@ -102,9 +102,9 @@ A web application that allows users to create professional CVs in both PDF and W
 
 **IMPORTANT**: This application requires Python 3.12 because Pillow (image processing library) does not support Python 3.13 yet.
 
-- The [runtime.txt](file://c:\Users\lenovo\Desktop\cv%20generator\runtime.txt) file specifies `python-3.12` to ensure Render uses the correct version
-- If Render defaults to Python 3.13, the deployment will fail with "Pillow does NOT support Python 3.13 yet"
-- Make sure Render uses Python 3.12 during deployment
+- The [runtime.txt](file://c:\Users\lenovo\Desktop\cv%20generator\runtime.txt) file specifies `python-3.12.4` to ensure Render uses the correct version
+- If Render defaults to Python 3.13, the deployment will fail with "Current Python version (3.13.4) is not allowed by the project (3.12)"
+- If you encounter this error, make sure your [runtime.txt](file://c:\Users\lenovo\Desktop\cv%20generator\runtime.txt) file contains exactly: `python-3.12.4`
 
 ## Project Structure
 

@@ -5,7 +5,7 @@ description = "Professional CV Generator"
 authors = ["Your Name <your.email@example.com>"]
 
 [tool.poetry.dependencies]
-python = "3.12"
+python = "^3.12"
 Flask = "2.3.3"
 python-docx = "0.8.11"
 reportlab = "4.0.4"
