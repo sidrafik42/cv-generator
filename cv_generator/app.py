@@ -417,25 +417,57 @@ def create_pdf_document(name, email, phone, address, profile,
     if photo_path and os.path.exists(photo_path):
         try:
             # Create a table to position photo next to profile
-            from reportlab.platypus import Table, TableStyle
+            from reportlab.platypus import Table, TableStyle, Image as ReportLabImage
             from reportlab.lib import colors
             
-            # Create table data
-            profile_data = []
+            # Prepare table data with photo and profile
+            table_data = []
             
-            # Add profile if exists
+            # Create photo image (resize to fit)
+            try:
+                photo_img = ReportLabImage(photo_path, width=1.5*inch, height=1.5*inch)
+            except Exception:
+                # If image loading fails, use a placeholder or skip photo
+                photo_img = None
+            
+            # Create row with photo and profile
+            row_data = []
+            
+            # Add photo cell (always add something, even if empty)
+            if photo_img:
+                row_data.append(photo_img)
+            else:
+                row_data.append(Paragraph("", normal_style))  # Empty cell if photo fails
+            
+            # Add profile cell
             if profile:
-                profile_data.append([Paragraph(profile, normal_style)])
+                row_data.append(Paragraph(profile, normal_style))
+            else:
+                row_data.append(Paragraph("", normal_style))  # Empty cell if no profile
             
-            # Create table
-            profile_table = Table(profile_data, colWidths=[400])
-            profile_table.setStyle(TableStyle([
-                ('ALIGN', (0, 0), (-1, -1), 'LEFT'),
-                ('VALIGN', (0, 0), (-1, -1), 'TOP'),
-            ]))
-            
-            story.append(profile_table)
-            story.append(Spacer(1, 12))
+            # Only create table if we have at least one non-empty cell
+            if photo_img or profile:
+                table_data.append(row_data)
+                
+                # Create table with 2 columns
+                profile_table = Table(table_data, colWidths=[1.5*inch, 4.5*inch])
+                profile_table.setStyle(TableStyle([
+                    ('ALIGN', (0, 0), (0, -1), 'LEFT'),  # Photo column
+                    ('ALIGN', (1, 0), (1, -1), 'LEFT'),   # Profile column
+                    ('VALIGN', (0, 0), (-1, -1), 'TOP'),
+                    ('LEFTPADDING', (0, 0), (-1, -1), 0),
+                    ('RIGHTPADDING', (0, 0), (-1, -1), 0),
+                    ('TOPPADDING', (0, 0), (-1, -1), 0),
+                    ('BOTTOMPADDING', (0, 0), (-1, -1), 0),
+                ]))
+                
+                story.append(profile_table)
+                story.append(Spacer(1, 12))
+            else:
+                # Fallback if both photo and profile are missing
+                if profile:
+                    story.append(Paragraph("PROFESSIONAL PROFILE", heading_style))
+                    story.append(Paragraph(profile, normal_style))
         except Exception as e:
             print(f"Error adding photo to PDF: {e}")
             # Fallback to original method if photo placement fails
