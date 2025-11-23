@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, send_file, redirect, url_for, Response
+from flask import Flask, render_template, request, send_file, redirect, url_for, Response, session
 import os
 from docx import Document
 from docx.shared import Inches, Pt
@@ -39,6 +39,9 @@ app = Flask(__name__,
             static_folder=os.path.join(root_dir, 'static'))
 app.config['UPLOAD_FOLDER'] = os.path.join(root_dir, 'static', 'uploads')
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max file size
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'your-secret-key-change-this-in-production')
+# CPA Grip Link - Set this via environment variable or update directly
+app.config['CPA_GRIP_LINK'] = os.environ.get('CPA_GRIP_LINK', 'https://your-cpa-grip-link.com/offer')
 
 @app.route('/')
 def index():
@@ -134,18 +137,53 @@ def generate_cv():
                        skills, languages, proficiencies, certifications, interests, references,
                        photo_path, pdf_filename)
     
-    # Return to home with success message
-    return redirect(url_for('success', docx_file=docx_filename, pdf_file=pdf_filename))
+    # Store filenames in session for download after offer completion
+    session['docx_file'] = docx_filename
+    session['pdf_file'] = pdf_filename
+    session['offer_completed'] = False
+    
+    # Return to success page
+    return redirect(url_for('success'))
 
 @app.route('/success')
 def success():
-    docx_file = request.args.get('docx_file')
-    pdf_file = request.args.get('pdf_file')
-    return render_template('success.html', docx_file=docx_file, pdf_file=pdf_file)
+    docx_file = session.get('docx_file')
+    pdf_file = session.get('pdf_file')
+    offer_completed = session.get('offer_completed', False)
+    cpa_link = app.config['CPA_GRIP_LINK']
+    
+    return render_template('success.html', 
+                         docx_file=docx_file, 
+                         pdf_file=pdf_file,
+                         offer_completed=offer_completed,
+                         cpa_link=cpa_link)
+
+@app.route('/complete_offer', methods=['POST'])
+def complete_offer():
+    """Mark offer as completed - called after user completes CPA offer"""
+    session['offer_completed'] = True
+    return redirect(url_for('success'))
 
 @app.route('/download/<filename>')
 def download_file(filename):
+    """Download CV file - only allowed after offer completion"""
+    # Check if offer is completed
+    if not session.get('offer_completed', False):
+        return redirect(url_for('success'))
+    
+    # Verify the file belongs to this session
+    docx_file = session.get('docx_file')
+    pdf_file = session.get('pdf_file')
+    
+    if filename not in [docx_file, pdf_file]:
+        return redirect(url_for('success'))
+    
     generated_path = os.path.join(root_dir, 'generated', filename)
+    
+    # Check if file exists
+    if not os.path.exists(generated_path):
+        return redirect(url_for('success'))
+    
     return send_file(generated_path, as_attachment=True)
 
 def create_word_document(name, email, phone, address, profile,

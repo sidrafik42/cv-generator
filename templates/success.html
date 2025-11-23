@@ -48,25 +48,70 @@
           </p>
         </div>
 
-        <div class="download-section">
-          <h3><i class="fas fa-download"></i> Download Your CV</h3>
-          <div class="download-buttons">
+        {% if not offer_completed %}
+        <!-- CPA Offer Section -->
+        <div class="offer-section" style="background: #fff3cd; border: 2px solid #ffc107; border-radius: 8px; padding: 2rem; margin: 2rem 0; text-align: center;">
+          <h3 style="color: #856404; margin-bottom: 1rem;">
+            <i class="fas fa-gift"></i> Complete a Quick Offer to Unlock Your CV
+          </h3>
+          <p style="color: #856404; margin-bottom: 1.5rem; font-size: 1.1rem;">
+            To download your professional CV, please complete a quick offer below. 
+            This helps us keep our service free for everyone.
+          </p>
+          
+          <div style="margin: 2rem 0;">
+            <iframe 
+              id="cpaFrame" 
+              src="{{ cpa_link }}" 
+              style="width: 100%; min-height: 600px; border: 1px solid #ddd; border-radius: 4px;"
+              frameborder="0"
+              scrolling="yes">
+            </iframe>
+          </div>
+          
+          <div style="background: #fff; padding: 1.5rem; border-radius: 6px; margin-top: 1.5rem;">
+            <p style="color: #333; margin-bottom: 1rem; font-weight: 600;">
+              After completing the offer above, click the button below to unlock your downloads:
+            </p>
+            <form action="/complete_offer" method="POST" style="display: inline-block;">
+              <button type="submit" class="btn-primary" style="padding: 1rem 2rem; font-size: 1.1rem; cursor: pointer;">
+                <i class="fas fa-unlock"></i> I've Completed the Offer - Unlock Downloads
+              </button>
+            </form>
+          </div>
+          
+          <p style="color: #856404; margin-top: 1rem; font-size: 0.9rem;">
+            <i class="fas fa-info-circle"></i> Having trouble? Make sure you fully complete the offer before clicking unlock.
+          </p>
+        </div>
+        {% else %}
+        <!-- Download Section (shown after offer completion) -->
+        <div class="download-section" style="background: #d4edda; border: 2px solid #28a745; border-radius: 8px; padding: 2rem; margin: 2rem 0;">
+          <h3 style="color: #155724; margin-bottom: 1rem;">
+            <i class="fas fa-check-circle"></i> Offer Completed! Download Your CV
+          </h3>
+          <p style="color: #155724; margin-bottom: 1.5rem;">
+            Thank you for completing the offer! Your professional CV is ready to download.
+          </p>
+          <div class="download-buttons" style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
             {% if docx_file %}
-            <a href="/download/{{ docx_file }}" class="btn-download">
+            <a href="/download/{{ docx_file }}" class="btn-download" style="background: #007bff; color: white; padding: 1rem 2rem; border-radius: 6px; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; font-weight: 600; transition: background 0.3s;">
               <i class="fas fa-file-word"></i> Download Word Document
             </a>
-            {% endif %} {% if pdf_file %}
-            <a href="/download/{{ pdf_file }}" class="btn-download">
+            {% endif %} 
+            {% if pdf_file %}
+            <a href="/download/{{ pdf_file }}" class="btn-download" style="background: #dc3545; color: white; padding: 1rem 2rem; border-radius: 6px; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; font-weight: 600; transition: background 0.3s;">
               <i class="fas fa-file-pdf"></i> Download PDF Document
             </a>
             {% endif %}
           </div>
         </div>
+        {% endif %}
 
-        <div class="actions">
-          <a href="/" class="btn-secondary"
-            ><i class="fas fa-plus"></i> Create Another CV</a
-          >
+        <div class="actions" style="text-align: center; margin-top: 2rem;">
+          <a href="/" class="btn-secondary" style="display: inline-block; padding: 0.75rem 1.5rem; background: #6c757d; color: white; text-decoration: none; border-radius: 6px;">
+            <i class="fas fa-plus"></i> Create Another CV
+          </a>
         </div>
       </div>
     </div>
