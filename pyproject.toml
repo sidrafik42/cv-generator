@@ -6,11 +6,11 @@ authors = ["Your Name <your.email@example.com>"]
 packages = [{include = "cv_generator"}]
 
 [tool.poetry.dependencies]
-python = "^3.12"
+python = ">=3.12,<3.13"
 Flask = "2.3.3"
 python-docx = "0.8.11"
 reportlab = "4.0.4"
-Pillow = "10.3.0"
+Pillow = "^10.5.0"
 Werkzeug = "2.3.7"
 gunicorn = "21.2.0"
 
